@@ -69,6 +69,7 @@ class OverlayWindow:
 
         def __init__(self, x: int, y: int, width: int, height: int,
                      scaling_position: geometry.Point,
+                     align_position: geometry.Point,
                      scaler: scaling.ImageScaler,
                      path: str, image: Image, last_modified: int,
                      cache: weakref.WeakKeyDictionary = None):
@@ -79,6 +80,7 @@ class OverlayWindow:
             self.width = width
             self.height = height
             self.scaling_position = scaling_position
+            self.align_position = align_position
             self.scaler = scaler
             self.path = path
             self.image = image
@@ -136,8 +138,12 @@ class OverlayWindow:
                 int((self.height and (self.height * term_info.font_height))
                     or image.height)
 
-            return (x, y, *self.transform_image(
-                term_info, width, height, format_scanline))
+            # apply alignment
+            transformed = self.transform_image(term_info, width, height, format_scanline)
+            final_x = x + int((width - transformed[0]) * self.align_position.x)
+            final_y = y + int((height - transformed[1]) * self.align_position.y)
+
+            return (final_x, final_y, *transformed)
 
     def __init__(self, display: Xdisplay.Display,
                  view, term_info: xutil.TerminalWindowInfo):

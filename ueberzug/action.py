@@ -110,6 +110,8 @@ class AddImageAction(ImageAction):
     height = attr.ib(type=int, converter=int, default=0)
     scaling_position_x = attr.ib(type=float, converter=float, default=0)
     scaling_position_y = attr.ib(type=float, converter=float, default=0)
+    align_position_x = attr.ib(type=float, converter=float, default=0)
+    align_position_y = attr.ib(type=float, converter=float, default=0)
     scaler = attr.ib(
         type=str, default=scaling.ContainImageScaler.get_scaler_name())
     # deprecated
@@ -260,6 +262,8 @@ class AddImageAction(ImageAction):
                 self.x, self.y, self.width, self.height,
                 geometry.Point(self.scaling_position_x,
                                self.scaling_position_y),
+                geometry.Point(self.align_position_x,
+                               self.align_position_y),
                 self.scaler_class(),
                 self.path, image, self.last_modified, cache)
         finally:
