@@ -84,6 +84,8 @@ it will be replaced.
 | ~~max_height~~| Integer      | **Deprecated: replaced by scalers (this behavior is implemented by the default scaler contain)**<br>image will be resized (while keeping it's aspect ratio) if it's height is bigger than max height | Yes | image height |
 | draw          | Boolean      | redraw window after adding the image, default True                 | Yes      | True    |
 | synchronously_draw | Boolean | redraw window immediately                                          | Yes      | False   |
+| align_position_x | Float     | x alignment within "width" bounds should be and element of [0, 1]. | Yes      | 0       |
+| align_position_y | Float     | analogous to align_position_x                                      | Yes      | 0       |
 | scaler        | String       | name of the image scaler<br>(algorithm which resizes the image to fit into the placement) | Yes      | contain |
 | scaling_position_x | Float   | the centered position, if possible<br>Specified as factor of the image size,<br>so it should be an element of [0, 1]. | Yes      | 0       |
 | scaling_position_y | Float   | analogous to scaling_position_x                                    | Yes      | 0       |
